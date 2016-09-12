@@ -1,5 +1,5 @@
 var colors = {
-  "green": "#a7d1b0",
+  "green": "#81e095",
   "purple": "#d9a0eb",
   "red": "#f76379",
   "blue": "#80d2ff",
@@ -38,12 +38,12 @@ var tooltip = d3.select("body")
   .text("tooltip");
 
 var json = {
- "name": "Her", "size": 20000,
+ "name": "Her", "size": 30000,
  "children": [
  {
    "name": "Personality", "size": 15000,
    "children": [
-    {"name": "Conscientiousness", "size": 3938, 
+    {"name": "Conscientiousness", "size": 10000, 
       "children": [
       {"name": "Achievement", "size": 5000, "parent": "Conscientiousness"},
       {"name": "Industriousness", "size": 2000, "parent": "Conscientiousness"},
@@ -98,7 +98,7 @@ var json = {
       {"name": "well-kept", "size": 2000, "parent": "Conscientiousness"}
      ]
     },
-    {"name": "Extraversion", "size": 3812,
+    {"name": "Extraversion", "size": 10000,
       "children": [
       {"name": "Dominance", "size": 2938, "parent": "Extraversion"},
       {"name": "Assertiveness", "size": 938, "parent": "Extraversion"},
@@ -130,7 +130,7 @@ var json = {
       {"name": "strong willed", "size": 938, "parent": "Extraversion"}
      ]
     },
-    {"name": "Openness", "size": 6714,
+    {"name": "Openness", "size": 10000,
       "children": [
       {"name": "intellect", "size": 3012, "parent": "Openness"},
       {"name": "imagination", "size": 3012, "parent": "Openness"},
@@ -165,7 +165,7 @@ var json = {
       {"name": "fantastical", "size": 3012, "parent": "Openness"},
      ]
     },
-    {"name": "Stability", "size": 7743,
+    {"name": "Stability", "size": 10000,
       "children": [
       {"name": "relaxed", "size": 1938, "parent": "Stability"},
       {"name": "calm", "size": 1938, "parent": "Stability"},
@@ -199,7 +199,7 @@ var json = {
       {"name": "peaceful", "size": 1938, "parent": "Stability"}
      ]
     },
-    {"name": "Agreeable", "size": 4743, 
+    {"name": "Agreeable", "size": 10000, 
       "children": [
       {"name": "Warmth", "size": 3534, "parent": "Agreeable"}, 
       {"name": "affectionate", "size": 3534, "parent": "Agreeable"}, 
@@ -287,7 +287,7 @@ function update() {
       .attr("x2", function(d) { return d.target.x; })
       .attr("y2", function(d) { return d.target.y; })
       .style("stroke", "#bcc4d2")
-      .style("stroke-width", 0.7);
+      .style("stroke-width", 0.25);
 
   // Update the nodes…
   node = node.data(nodes, function(d) { return d.id; }).style("fill", color);
@@ -342,8 +342,8 @@ function color(d) {
     case "Extraversion": //red
       return colors.red;
       break;
-    case "Agreeable": //orange
-      return colors.orange;
+    case "Agreeable": //darkYellow
+      return colors.darkYellow;
       break;
     case "Conscientiousness": //green
       return colors.green;
@@ -387,8 +387,8 @@ function color(d) {
       case "Passion": //red
         return colors.red;
         break;
-      case "Purpose": //yellow
-        return colors.darkYellow;
+      case "Purpose": //orange
+        return colors.orange;
         break;
       case "Her": //pink
         return colors.pink;
