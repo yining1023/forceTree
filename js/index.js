@@ -305,7 +305,7 @@ function update() {
       .style("opacity", 0.8)
       .on("mouseover", function(d) {
         var bubble = d3.select(this);
-        bubble.attr("stroke", "#000")
+        bubble.attr("stroke", "#fff")
           .attr("stroke-width", 2.5);
         tooltip.text(d.name);
         // tooltip.text(d.name + ((d.size) ? (": " + d.size) : ""));
