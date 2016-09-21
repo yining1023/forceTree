@@ -11,20 +11,25 @@ var colors = {
   "darkBlue": "#8098ff"
 };
 
-var width = 960,
-    height = 600,
+var width = 1180,
+    height = 700,
     root;
 
 var force = d3.layout.force()
     .size([width, height])
     .on("tick", tick);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#tree").append("svg")
     .attr("width", width)
     .attr("height", height);
 
+var svg2 = d3.select("#legend").append("svg")
+    .attr("width", 500)
+    .attr("height", 800);
+
 var link = svg.selectAll(".link"),
-    node = svg.selectAll(".node");
+    node = svg.selectAll(".node"),
+    node2 = svg2.selectAll(".node");
 
 var tooltip = d3.select("body")
   .append("div")
@@ -58,436 +63,182 @@ function tick() {
 //   update();
 // });
 var json = {
- "name": "Her", "size": 30000,
- "children": [
- {
   "name": "Personality", "size": 15000,
    "children": [
-    {"name": "Conscientiousness", "size": 10000, 
+    {"name": "Conscientiousness", "size": 3500, 
       "children": [
-      {"name": "Achievement", "size": 5000, "parent": "Conscientiousness"},
-      {"name": "Industriousness", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Order", "size": 5000, "parent": "Conscientiousness"},
-      {"name": "orderly", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "tidy", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "neat", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "well-organized", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Self-control", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Decisiveness", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Responsibility", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Reliability", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "non-delinquency", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Cautious", "size": 5000, "parent": "Conscientiousness"},
-      {"name": "judicious", "size": 1000, "parent": "Conscientiousness"},
-      {"name": "vigilant", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "alert", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "orderly", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "clean", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "precise", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "systematic", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Responsible", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "dutiful", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "obliged", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "accomplished", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "disciplined", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "will-power", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "grit", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "persistent", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "dedicated", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "cautious", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "think carefully", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "strive hard", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "thinks carefully", "size": 6000, "parent": "Conscientiousness"},
-      {"name": "self-efficacy", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "deliberate", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "meticulous", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "prudent", "size": 4000, "parent": "Conscientiousness"},
-      {"name": "precise", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "scrupulous", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "rigorous", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "mindful", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "assiduous", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "exacting", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "fastidious", "size": 5000, "parent": "Conscientiousness"},
-      {"name": "punctual", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "systematic", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "thorough", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "clean", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "careful", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "neat", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "well-kept", "size": 2000, "parent": "Conscientiousness"}
+      {"name": "Achievement", "size": 5000, "parent": "Conscientiousness", "author": "Cici"},
+      {"name": "Industriousness", "size": 2000, "parent": "Conscientiousness", "author": "Cici"},
+      {"name": "Order", "size": 5000, "parent": "Conscientiousness", "author": "Cici"},
+      {"name": "orderly", "size": 2000, "parent": "Conscientiousness", "author": "Cici"},
+      {"name": "tidy", "size": 2000, "parent": "Conscientiousness", "author": "Cici"},
+      {"name": "neat", "size": 2000, "parent": "Conscientiousness", "author": "Cici"},
+      {"name": "well-organized", "size": 2000, "parent": "Conscientiousness", "author": "Cici"},
+      {"name": "Self-control", "size": 2000, "parent": "Conscientiousness", "author": "Cici"},
+
+      {"name": "Decisiveness", "size": 2000, "parent": "Conscientiousness", "author": "Alex"},
+      {"name": "Responsibility", "size": 2000, "parent": "Conscientiousness", "author": "Alex"},
+      {"name": "Reliability", "size": 2000, "parent": "Conscientiousness", "author": "Alex"},
+      {"name": "non-delinquency", "size": 2000, "parent": "Conscientiousness", "author": "Alex"},
+      {"name": "Cautious", "size": 5000, "parent": "Conscientiousness", "author": "Alex"},
+      {"name": "judicious", "size": 1000, "parent": "Conscientiousness", "author": "Alex"},
+      {"name": "vigilant", "size": 2000, "parent": "Conscientiousness", "author": "Alex"},
+      {"name": "alert", "size": 2000, "parent": "Conscientiousness", "author": "Alex"},
+      // {"name": "orderly", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "clean", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "precise", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "systematic", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "Responsible", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "dutiful", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "obliged", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "accomplished", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "disciplined", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "will-power", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "grit", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "persistent", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "dedicated", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "cautious", "size": 2000, "parent": "Conscientiousness"},
+      // {"name": "think carefully", "size": 2000, "parent": "Conscientiousness"},
      ]
     },
-    {"name": "Extraversion", "size": 10000,
+    {"name": "Extraversion", "size": 3500,
       "children": [
-      {"name": "Dominance", "size": 2938, "parent": "Extraversion"},
-      {"name": "Assertiveness", "size": 938, "parent": "Extraversion"},
-      {"name": "Sociability", "size": 8938, "parent": "Extraversion"}, 
-      {"name": "Excitement seeking", "size": 938, "parent": "Extraversion"},
-      {"name": "adventurousness", "size": 938, "parent": "Extraversion"},
-      {"name": "bold", "size": 938, "parent": "Extraversion"},
-      {"name": "enthusiastic", "size": 938, "parent": "Extraversion"},
-      {"name": "joyful", "size": 6938, "parent": "Extraversion"},
-      {"name": "direct", "size": 938, "parent": "Extraversion"},
-      {"name": "energetic", "size": 938, "parent": "Extraversion"},
-      {"name": "active", "size": 5938, "parent": "Extraversion"},
-      {"name": "optimistic", "size": 938, "parent": "Extraversion"},
-      {"name": "friendly", "size": 938, "parent": "Extraversion"},
-      {"name": "cheerful", "size": 938, "parent": "Extraversion"},
-      {"name": "Gregarious", "size": 938, "parent": "Extraversion"},
-      {"name": "affable", "size": 1938, "parent": "Extraversion"},
-      {"name": "social", "size": 938, "parent": "Extraversion"},
-      {"name": "fun", "size": 938, "parent": "Extraversion"},
-      {"name": "outgoing", "size": 2938, "parent": "Extraversion"},
-      {"name": "warm", "size": 938, "parent": "Extraversion"},
-      {"name": "communicative", "size": 938, "parent": "Extraversion"},
-      {"name": "approachable", "size": 938, "parent": "Extraversion"},
-      {"name": "expansive", "size": 938, "parent": "Extraversion"},
-      {"name": "genial", "size": 938, "parent": "Extraversion"},
-      {"name": "life of the party", "size": 938, "parent": "Extraversion"},
-      {"name": "confident",  "size": 7938, "parent": "Extraversion"},
-      {"name": "emphatic", "size": 3938, "parent": "Extraversion"},
-      {"name": "strong willed", "size": 938, "parent": "Extraversion"}
+      {"name": "Dominance", "size": 2938, "parent": "Extraversion", "author": "Cici"},
+      {"name": "Assertiveness", "size": 938, "parent": "Extraversion", "author": "Cici"},
+      {"name": "Sociability", "size": 8938, "parent": "Extraversion", "author": "Cici"}, 
+      {"name": "Excitement seeking", "size": 938, "parent": "Extraversion", "author": "Cici"},
+      {"name": "adventurousness", "size": 938, "parent": "Extraversion", "author": "Cici"},
+      {"name": "bold", "size": 938, "parent": "Extraversion", "author": "Cici"},
+      {"name": "enthusiastic", "size": 938, "parent": "Extraversion", "author": "Cici"},
+      {"name": "joyful", "size": 6938, "parent": "Extraversion", "author": "Cici"},
+      {"name": "direct", "size": 938, "parent": "Extraversion", "author": "Alex"},
+      {"name": "energetic", "size": 938, "parent": "Extraversion", "author": "Alex"},
+      {"name": "active", "size": 5938, "parent": "Extraversion", "author": "Alex"},
+      {"name": "optimistic", "size": 938, "parent": "Extraversion", "author": "Alex"},
+      {"name": "friendly", "size": 938, "parent": "Extraversion", "author": "Alex"},
+      // {"name": "cheerful", "size": 938, "parent": "Extraversion"},
+      // {"name": "Gregarious", "size": 938, "parent": "Extraversion"},
+      // {"name": "affable", "size": 1938, "parent": "Extraversion"},
+      // {"name": "social", "size": 938, "parent": "Extraversion"},
+      // {"name": "fun", "size": 938, "parent": "Extraversion"},
+      // {"name": "outgoing", "size": 2938, "parent": "Extraversion"},
+      // {"name": "warm", "size": 938, "parent": "Extraversion"},
+      // {"name": "communicative", "size": 938, "parent": "Extraversion"},
+      // {"name": "approachable", "size": 938, "parent": "Extraversion"},
+      // {"name": "expansive", "size": 938, "parent": "Extraversion"},
+      // {"name": "genial", "size": 938, "parent": "Extraversion"},
+      // {"name": "life of the party", "size": 938, "parent": "Extraversion"},
+      // {"name": "confident",  "size": 7938, "parent": "Extraversion"},
+      // {"name": "emphatic", "size": 3938, "parent": "Extraversion"},
+      // {"name": "strong willed", "size": 938, "parent": "Extraversion"}
      ]
     },
-    {"name": "Openness", "size": 10000,
+    {"name": "Openness", "size": 3500,
       "children": [
-      {"name": "intellect", "size": 3012, "parent": "Openness"},
-      {"name": "imagination", "size": 3012, "parent": "Openness"},
-      {"name": "Curiosity", "size": 3012, "parent": "Openness"},
-      {"name": "artistic", "size": 2012, "parent": "Openness"},
-      {"name": "tolerant", "size": 3012, "parent": "Openness"},
-      {"name": "introspective", "size": 3012, "parent": "Openness"},
-      {"name": "inventive", "size": 3012, "parent": "Openness"},
-      {"name": "creative", "size": 1012, "parent": "Openness"},
-      {"name": "inventive", "size": 3012, "parent": "Openness"},
-      {"name": "perceptive", "size": 3012, "parent": "Openness"},
-      {"name": "experimental", "size": 3012, "parent": "Openness"},
-      {"name": "absorption/flow", "size": 3012, "parent": "Openness"},
-      {"name": "deep emotions", "size": 3012, "parent": "Openness"},
-      {"name": "experiential", "size": 3012, "parent": "Openness"},
-      {"name": "innovative", "size": 3012, "parent": "Openness"},
-      {"name": "original", "size": 3012, "parent": "Openness"},
-      {"name": "ingenious", "size": 3012, "parent": "Openness"},
-      {"name": "visionary", "size": 1012, "parent": "Openness"},
-      {"name": "whimsical", "size": 3012, "parent": "Openness"},
-      {"name": "reflective", "size": 3012, "parent": "Openness"},
-      {"name": "thoughtful", "size": 3012, "parent": "Openness"},
-      {"name": "contemplative", "size": 3012, "parent": "Openness"},
-      {"name": "pensive", "size": 3012, "parent": "Openness"},
-      {"name": "inquisitive", "size": 3012, "parent": "Openness"}, 
-      {"name": "analytical", "size": 7012, "parent": "Openness"},
-      {"name": "examining", "size": 3012, "parent": "Openness"}, 
-      {"name": "inquiring", "size": 3012, "parent": "Openness"}, 
-      {"name": "investigative", "size": 3012, "parent": "Openness"},
-      {"name": "musing", "size": 3012, "parent": "Openness"},
-      {"name": "meditative", "size": 8012, "parent": "Openness"},
-      {"name": "fantastical", "size": 3012, "parent": "Openness"},
+      {"name": "intellect", "size": 3012, "parent": "Openness", "author": "Cici"},
+      {"name": "imagination", "size": 3012, "parent": "Openness", "author": "Cici"},
+      {"name": "Curiosity", "size": 3012, "parent": "Openness", "author": "Cici"},
+      {"name": "artistic", "size": 2012, "parent": "Openness", "author": "Cici"},
+      {"name": "tolerant", "size": 3012, "parent": "Openness", "author": "Cici"},
+      {"name": "introspective", "size": 3012, "parent": "Openness", "author": "Cici"},
+      {"name": "inventive", "size": 3012, "parent": "Openness", "author": "Cici"},
+      {"name": "creative", "size": 1012, "parent": "Openness", "author": "Cici"},
+      {"name": "inventive", "size": 3012, "parent": "Openness", "author": "Alex"},
+      {"name": "perceptive", "size": 3012, "parent": "Openness", "author": "Alex"},
+      {"name": "experimental", "size": 3012, "parent": "Openness", "author": "Alex"},
+      {"name": "absorption/flow", "size": 3012, "parent": "Openness", "author": "Alex"},
+      {"name": "deep emotions", "size": 3012, "parent": "Openness", "author": "Alex"},
+      {"name": "experiential", "size": 3012, "parent": "Openness", "author": "Alex"},
+      {"name": "innovative", "size": 3012, "parent": "Openness", "author": "Alex"},
+      // {"name": "original", "size": 3012, "parent": "Openness"},
+      // {"name": "ingenious", "size": 3012, "parent": "Openness"},
+      // {"name": "visionary", "size": 1012, "parent": "Openness"},
+      // {"name": "whimsical", "size": 3012, "parent": "Openness"},
+      // {"name": "reflective", "size": 3012, "parent": "Openness"},
+      // {"name": "thoughtful", "size": 3012, "parent": "Openness"},
+      // {"name": "contemplative", "size": 3012, "parent": "Openness"},
+      // {"name": "pensive", "size": 3012, "parent": "Openness"},
+      // {"name": "inquisitive", "size": 3012, "parent": "Openness"}, 
+      // {"name": "analytical", "size": 7012, "parent": "Openness"},
+      // {"name": "examining", "size": 3012, "parent": "Openness"}, 
+      // {"name": "inquiring", "size": 3012, "parent": "Openness"}, 
+      // {"name": "investigative", "size": 3012, "parent": "Openness"},
+      // {"name": "musing", "size": 3012, "parent": "Openness"},
+      // {"name": "meditative", "size": 8012, "parent": "Openness"},
+      // {"name": "fantastical", "size": 3012, "parent": "Openness"},
      ]
     },
-    {"name": "Stability", "size": 10000,
+    {"name": "Stability", "size": 3500,
       "children": [
-      {"name": "relaxed", "size": 1938, "parent": "Stability"},
-      {"name": "calm", "size": 1938, "parent": "Stability"},
-      {"name": "content", "size": 1938, "parent": "Stability"}, 
-      {"name": "secure", "size": 1938, "parent": "Stability"},
-      {"name": "emotionally strong", "size": 5938, "parent": "Stability"},
-      {"name": "unreactive", "size": 1938, "parent": "Stability"},
-      {"name": "well-being", "size": 1938, "parent": "Stability"},
-      {"name": "brave", "size": 1938, "parent": "Stability"}, 
-      {"name": "strong", "size": 1938, "parent": "Stability"},
-      {"name": "hardy", "size": 1938, "parent": "Stability"},
-      {"name": "assured", "size": 1938, "parent": "Stability"},
-      {"name": "steady", "size": 6938, "parent": "Stability"},
-      {"name": "tranquil", "size": 938, "parent": "Stability"},
-      {"name": "bold", "size": 1938, "parent": "Stability"},
-      {"name": "pleasant", "size": 1938, "parent": "Stability"},
-      {"name": "easygoing", "size": 1938, "parent": "Stability"},
-      {"name": "stable", "size": 938, "parent": "Stability"},
-      {"name": "harmonious", "size": 1938, "parent": "Stability"},
-      {"name": "at peace", "size": 1938, "parent": "Stability"},
-      {"name": "serene", "size": 1938, "parent": "Stability"},
-      {"name": "unflappable", "size": 1938, "parent": "Stability"},
-      {"name": "collected", "size": 1938, "parent": "Stability"},
-      {"name": "poised", "size": 7938, "parent": "Stability"},
-      {"name": "comfortable", "size": 2938, "parent": "Stability"},
-      {"name": "content", "size": 1938, "parent": "Stability"},
-      {"name": "satisfied", "size": 5938, "parent": "Stability"},
-      {"name": "fulfilled", "size": 1938, "parent": "Stability"},
-      {"name": "at ease", "size": 1938, "parent": "Stability"},
-      {"name": "unanxious", "size": 1938, "parent": "Stability"},
-      {"name": "peaceful", "size": 1938, "parent": "Stability"}
+      {"name": "relaxed", "size": 1938, "parent": "Stability", "author": "Cici"},
+      {"name": "calm", "size": 1938, "parent": "Stability", "author": "Cici"},
+      {"name": "content", "size": 1938, "parent": "Stability", "author": "Cici"}, 
+      {"name": "secure", "size": 1938, "parent": "Stability", "author": "Cici"},
+      {"name": "emotionally strong", "size": 5938, "parent": "Stability", "author": "Cici"},
+      {"name": "unreactive", "size": 1938, "parent": "Stability", "author": "Cici"},
+      {"name": "well-being", "size": 1938, "parent": "Stability", "author": "Cici"},
+      {"name": "brave", "size": 1938, "parent": "Stability", "author": "Cici"}, 
+      {"name": "strong", "size": 1938, "parent": "Stability", "author": "Cici"},
+      {"name": "hardy", "size": 1938, "parent": "Stability", "author": "Alex"},
+      {"name": "assured", "size": 1938, "parent": "Stability", "author": "Alex"},
+      {"name": "steady", "size": 6938, "parent": "Stability", "author": "Alex"},
+      {"name": "tranquil", "size": 938, "parent": "Stability", "author": "Alex"},
+      {"name": "bold", "size": 1938, "parent": "Stability", "author": "Alex"},
+      {"name": "pleasant", "size": 1938, "parent": "Stability", "author": "Alex"},
+      {"name": "easygoing", "size": 1938, "parent": "Stability", "author": "Alex"},
+      // {"name": "stable", "size": 938, "parent": "Stability"},
+      // {"name": "harmonious", "size": 1938, "parent": "Stability"},
+      // {"name": "at peace", "size": 1938, "parent": "Stability"},
+      // {"name": "serene", "size": 1938, "parent": "Stability"},
+      // {"name": "unflappable", "size": 1938, "parent": "Stability"},
+      // {"name": "collected", "size": 1938, "parent": "Stability"},
+      // {"name": "poised", "size": 7938, "parent": "Stability"},
+      // {"name": "comfortable", "size": 2938, "parent": "Stability"},
+      // {"name": "content", "size": 1938, "parent": "Stability"},
+      // {"name": "satisfied", "size": 5938, "parent": "Stability"},
+      // {"name": "fulfilled", "size": 1938, "parent": "Stability"},
+      // {"name": "at ease", "size": 1938, "parent": "Stability"},
+      // {"name": "unanxious", "size": 1938, "parent": "Stability"},
+      // {"name": "peaceful", "size": 1938, "parent": "Stability"}
      ]
     },
-    {"name": "Agreeable", "size": 10000, 
+    {"name": "Agreeable", "size": 3500, 
       "children": [
-      {"name": "Warmth", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "affectionate", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "generosity", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "cooperation", "size": 334, "parent": "Agreeable"}, 
-      {"name": "gentleness", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "modesty", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "altruistic", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "tender-minded", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "sympathetic", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "benevolent", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "generous, kind", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "compassionate", "size": 534, "parent": "Agreeable"}, 
-      {"name": "empathetic", "size": 3534, "parent": "Agreeable"},
-      {"name": "modesty", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "virtuous", "size": 5534, "parent": "Agreeable"}, 
-      {"name": "justice", "size": 3534, "parent": "Agreeable"},
-      {"name": "modest", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "humble giving", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "charitable", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "gentle", "size": 6534, "parent": "Agreeable"}, 
-      {"name": "kind hearted", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "loving", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "sympathetic", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "benevolent", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "caring", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "philanthropic", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "trusting", "size": 4534, "parent": "Agreeable"}, 
-      {"name": "forgiving", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "unassuming", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "sincere", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "candid", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "genuine", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "compromising", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "tender-hearted", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "cooperative", "size": 9534, "parent": "Agreeable"}
-     ]
-    }
-   ]
-  },
-  {
-   "name": "Passion", "size": 15000,
-   "children": [
-    {"name": "urban vs nature", "size": 3534, "parent": "Passion"}, 
-    {"name": "indoor vs. outdoor", "size": 5731, "parent": "Passion"},
-    {"name": "social vs. non-social", "size": 2840, "parent": "Passion"},
-    {"name": "active vs inactive", "size": 4914, "parent": "Passion"}
-   ]
-  },
-  {
-   "name": "Purpose", "size": 15000,
-   "children": [
-    {"name": "love", "size": 7074, "parent": "Purpose"}
-   ]
-  },
-  {
-  "name": "Personality", "size": 15000,
-   "children": [
-    {"name": "Conscientiousness", "size": 10000, 
-      "children": [
-      {"name": "Achievement", "size": 5000, "parent": "Conscientiousness"},
-      {"name": "Industriousness", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Order", "size": 5000, "parent": "Conscientiousness"},
-      {"name": "orderly", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "tidy", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "neat", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "well-organized", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Self-control", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Decisiveness", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Responsibility", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Reliability", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "non-delinquency", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Cautious", "size": 5000, "parent": "Conscientiousness"},
-      {"name": "judicious", "size": 1000, "parent": "Conscientiousness"},
-      {"name": "vigilant", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "alert", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "orderly", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "clean", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "precise", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "systematic", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "Responsible", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "dutiful", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "obliged", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "accomplished", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "disciplined", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "will-power", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "grit", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "persistent", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "dedicated", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "cautious", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "think carefully", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "strive hard", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "thinks carefully", "size": 6000, "parent": "Conscientiousness"},
-      {"name": "self-efficacy", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "deliberate", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "meticulous", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "prudent", "size": 4000, "parent": "Conscientiousness"},
-      {"name": "precise", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "scrupulous", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "rigorous", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "mindful", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "assiduous", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "exacting", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "fastidious", "size": 5000, "parent": "Conscientiousness"},
-      {"name": "punctual", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "systematic", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "thorough", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "clean", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "careful", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "neat", "size": 2000, "parent": "Conscientiousness"},
-      {"name": "well-kept", "size": 2000, "parent": "Conscientiousness"}
-     ]
-    },
-    {"name": "Extraversion", "size": 10000,
-      "children": [
-      {"name": "Dominance", "size": 2938, "parent": "Extraversion"},
-      {"name": "Assertiveness", "size": 938, "parent": "Extraversion"},
-      {"name": "Sociability", "size": 8938, "parent": "Extraversion"}, 
-      {"name": "Excitement seeking", "size": 938, "parent": "Extraversion"},
-      {"name": "adventurousness", "size": 938, "parent": "Extraversion"},
-      {"name": "bold", "size": 938, "parent": "Extraversion"},
-      {"name": "enthusiastic", "size": 938, "parent": "Extraversion"},
-      {"name": "joyful", "size": 6938, "parent": "Extraversion"},
-      {"name": "direct", "size": 938, "parent": "Extraversion"},
-      {"name": "energetic", "size": 938, "parent": "Extraversion"},
-      {"name": "active", "size": 5938, "parent": "Extraversion"},
-      {"name": "optimistic", "size": 938, "parent": "Extraversion"},
-      {"name": "friendly", "size": 938, "parent": "Extraversion"},
-      {"name": "cheerful", "size": 938, "parent": "Extraversion"},
-      {"name": "Gregarious", "size": 938, "parent": "Extraversion"},
-      {"name": "affable", "size": 1938, "parent": "Extraversion"},
-      {"name": "social", "size": 938, "parent": "Extraversion"},
-      {"name": "fun", "size": 938, "parent": "Extraversion"},
-      {"name": "outgoing", "size": 2938, "parent": "Extraversion"},
-      {"name": "warm", "size": 938, "parent": "Extraversion"},
-      {"name": "communicative", "size": 938, "parent": "Extraversion"},
-      {"name": "approachable", "size": 938, "parent": "Extraversion"},
-      {"name": "expansive", "size": 938, "parent": "Extraversion"},
-      {"name": "genial", "size": 938, "parent": "Extraversion"},
-      {"name": "life of the party", "size": 938, "parent": "Extraversion"},
-      {"name": "confident",  "size": 7938, "parent": "Extraversion"},
-      {"name": "emphatic", "size": 3938, "parent": "Extraversion"},
-      {"name": "strong willed", "size": 938, "parent": "Extraversion"}
-     ]
-    },
-    {"name": "Openness", "size": 10000,
-      "children": [
-      {"name": "intellect", "size": 3012, "parent": "Openness"},
-      {"name": "imagination", "size": 3012, "parent": "Openness"},
-      {"name": "Curiosity", "size": 3012, "parent": "Openness"},
-      {"name": "artistic", "size": 2012, "parent": "Openness"},
-      {"name": "tolerant", "size": 3012, "parent": "Openness"},
-      {"name": "introspective", "size": 3012, "parent": "Openness"},
-      {"name": "inventive", "size": 3012, "parent": "Openness"},
-      {"name": "creative", "size": 1012, "parent": "Openness"},
-      {"name": "inventive", "size": 3012, "parent": "Openness"},
-      {"name": "perceptive", "size": 3012, "parent": "Openness"},
-      {"name": "experimental", "size": 3012, "parent": "Openness"},
-      {"name": "absorption/flow", "size": 3012, "parent": "Openness"},
-      {"name": "deep emotions", "size": 3012, "parent": "Openness"},
-      {"name": "experiential", "size": 3012, "parent": "Openness"},
-      {"name": "innovative", "size": 3012, "parent": "Openness"},
-      {"name": "original", "size": 3012, "parent": "Openness"},
-      {"name": "ingenious", "size": 3012, "parent": "Openness"},
-      {"name": "visionary", "size": 1012, "parent": "Openness"},
-      {"name": "whimsical", "size": 3012, "parent": "Openness"},
-      {"name": "reflective", "size": 3012, "parent": "Openness"},
-      {"name": "thoughtful", "size": 3012, "parent": "Openness"},
-      {"name": "contemplative", "size": 3012, "parent": "Openness"},
-      {"name": "pensive", "size": 3012, "parent": "Openness"},
-      {"name": "inquisitive", "size": 3012, "parent": "Openness"}, 
-      {"name": "analytical", "size": 7012, "parent": "Openness"},
-      {"name": "examining", "size": 3012, "parent": "Openness"}, 
-      {"name": "inquiring", "size": 3012, "parent": "Openness"}, 
-      {"name": "investigative", "size": 3012, "parent": "Openness"},
-      {"name": "musing", "size": 3012, "parent": "Openness"},
-      {"name": "meditative", "size": 8012, "parent": "Openness"},
-      {"name": "fantastical", "size": 3012, "parent": "Openness"},
-     ]
-    },
-    {"name": "Stability", "size": 10000,
-      "children": [
-      {"name": "relaxed", "size": 1938, "parent": "Stability"},
-      {"name": "calm", "size": 1938, "parent": "Stability"},
-      {"name": "content", "size": 1938, "parent": "Stability"}, 
-      {"name": "secure", "size": 1938, "parent": "Stability"},
-      {"name": "emotionally strong", "size": 5938, "parent": "Stability"},
-      {"name": "unreactive", "size": 1938, "parent": "Stability"},
-      {"name": "well-being", "size": 1938, "parent": "Stability"},
-      {"name": "brave", "size": 1938, "parent": "Stability"}, 
-      {"name": "strong", "size": 1938, "parent": "Stability"},
-      {"name": "hardy", "size": 1938, "parent": "Stability"},
-      {"name": "assured", "size": 1938, "parent": "Stability"},
-      {"name": "steady", "size": 6938, "parent": "Stability"},
-      {"name": "tranquil", "size": 938, "parent": "Stability"},
-      {"name": "bold", "size": 1938, "parent": "Stability"},
-      {"name": "pleasant", "size": 1938, "parent": "Stability"},
-      {"name": "easygoing", "size": 1938, "parent": "Stability"},
-      {"name": "stable", "size": 938, "parent": "Stability"},
-      {"name": "harmonious", "size": 1938, "parent": "Stability"},
-      {"name": "at peace", "size": 1938, "parent": "Stability"},
-      {"name": "serene", "size": 1938, "parent": "Stability"},
-      {"name": "unflappable", "size": 1938, "parent": "Stability"},
-      {"name": "collected", "size": 1938, "parent": "Stability"},
-      {"name": "poised", "size": 7938, "parent": "Stability"},
-      {"name": "comfortable", "size": 2938, "parent": "Stability"},
-      {"name": "content", "size": 1938, "parent": "Stability"},
-      {"name": "satisfied", "size": 5938, "parent": "Stability"},
-      {"name": "fulfilled", "size": 1938, "parent": "Stability"},
-      {"name": "at ease", "size": 1938, "parent": "Stability"},
-      {"name": "unanxious", "size": 1938, "parent": "Stability"},
-      {"name": "peaceful", "size": 1938, "parent": "Stability"}
-     ]
-    },
-    {"name": "Agreeable", "size": 10000, 
-      "children": [
-      {"name": "Warmth", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "affectionate", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "generosity", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "cooperation", "size": 334, "parent": "Agreeable"}, 
-      {"name": "gentleness", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "modesty", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "altruistic", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "tender-minded", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "sympathetic", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "benevolent", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "generous, kind", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "compassionate", "size": 534, "parent": "Agreeable"}, 
-      {"name": "empathetic", "size": 3534, "parent": "Agreeable"},
-      {"name": "modesty", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "virtuous", "size": 5534, "parent": "Agreeable"}, 
-      {"name": "justice", "size": 3534, "parent": "Agreeable"},
-      {"name": "modest", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "humble giving", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "charitable", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "gentle", "size": 6534, "parent": "Agreeable"}, 
-      {"name": "kind hearted", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "loving", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "sympathetic", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "benevolent", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "caring", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "philanthropic", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "trusting", "size": 4534, "parent": "Agreeable"}, 
-      {"name": "forgiving", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "unassuming", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "sincere", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "candid", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "genuine", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "compromising", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "tender-hearted", "size": 3534, "parent": "Agreeable"}, 
-      {"name": "cooperative", "size": 9534, "parent": "Agreeable"}
-     ]
-    }
-   ]
-  },
-  {
-   "name": "Passion", "size": 15000,
-   "children": [
-    {"name": "urban vs nature", "size": 3534, "parent": "Passion"}, 
-    {"name": "indoor vs. outdoor", "size": 5731, "parent": "Passion"},
-    {"name": "social vs. non-social", "size": 2840, "parent": "Passion"},
-    {"name": "active vs inactive", "size": 4914, "parent": "Passion"}
-   ]
-  },
-  {
-   "name": "Purpose", "size": 15000,
-   "children": [
-    {"name": "love", "size": 7074, "parent": "Purpose"}
+      {"name": "Warmth", "size": 3534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "affectionate", "size": 3534, "parent": "Agreeable", "author": "Cici"},
+      {"name": "generosity", "size": 3534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "cooperation", "size": 334, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "gentleness", "size": 3534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "modesty", "size": 3534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "altruistic", "size": 3534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "tender-minded", "size": 3534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "sympathetic", "size": 3534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "benevolent", "size": 3534, "parent": "Agreeable", "author": "Cici"},
+      {"name": "generous, kind", "size": 3534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "compassionate", "size": 534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "empathetic", "size": 3534, "parent": "Agreeable", "author": "Cici"},
+      {"name": "modesty", "size": 3534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "virtuous", "size": 5534, "parent": "Agreeable", "author": "Cici"}, 
+      {"name": "justice", "size": 3534, "parent": "Agreeable", "author": "Cici"},
+      {"name": "modest", "size": 3534, "parent": "Agreeable", "author": "Cici"},
+      {"name": "humble giving", "size": 3534, "parent": "Agreeable", "author": "Cici"},
+      {"name": "charitable", "size": 3534, "parent": "Agreeable", "author": "Alex"},
+      {"name": "gentle", "size": 6534, "parent": "Agreeable", "author": "Alex"}, 
+      {"name": "kind hearted", "size": 3534, "parent": "Agreeable", "author": "Alex"},
+      {"name": "loving", "size": 3534, "parent": "Agreeable", "author": "Alex"},
+      {"name": "sympathetic", "size": 3534, "parent": "Agreeable", "author": "Alex"}, 
+      {"name": "benevolent", "size": 3534, "parent": "Agreeable", "author": "Alex"}, 
+      {"name": "caring", "size": 3534, "parent": "Agreeable", "author": "Alex"}, 
+      {"name": "philanthropic", "size": 3534, "parent": "Agreeable", "author": "Alex"}, 
+      {"name": "trusting", "size": 4534, "parent": "Agreeable", "author": "Alex"}, 
+      {"name": "forgiving", "size": 3534, "parent": "Agreeable", "author": "Alex"},
+      // {"name": "unassuming", "size": 3534, "parent": "Agreeable"}, 
+      // {"name": "sincere", "size": 3534, "parent": "Agreeable"}, 
+      // {"name": "candid", "size": 3534, "parent": "Agreeable"}, 
+      // {"name": "genuine", "size": 3534, "parent": "Agreeable"}, 
+      // {"name": "compromising", "size": 3534, "parent": "Agreeable"}, 
+      // {"name": "tender-hearted", "size": 3534, "parent": "Agreeable"}, 
+      // {"name": "cooperative", "size": 9534, "parent": "Agreeable"}
    ]
   }
  ]
@@ -516,26 +267,36 @@ function update() {
   // Enter any new links.
   link.enter().insert("line", ".node")
       .attr("class", "link")
+      .attr("class",function(d) { if (d.author==='Alex') {return "node1"} else if (d.author==='Cici') {return "node2"}})
       .attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
       .attr("x2", function(d) { return d.target.x; })
       .attr("y2", function(d) { return d.target.y; })
+      .attr("id", "surveyLine")
       .style("stroke", "#bcc4d2")
       .style("stroke-width", 0.4);
 
   // Update the nodes…
   node = node.data(nodes, function(d) { return d.id; }).style("fill", color);
+  node2 = node2.data(nodes, function(d) { return d.id; }).style("fill", color);
 
   // Exit any old nodes.
   node.exit().remove();
+  node2.exit().remove();
 
   // Enter any new nodes.
   node.enter().append("circle")
-      .attr("class", "node")
+      // .attr("class", "node1")
+      // .attr("class", "node2")
+      .attr("class",function(d) { if (d.author==='Alex') {return "node1"} else if (d.author==='Cici') {return "node2"}})
       .attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; })
+      .attr("id", "surveyCircle")
       .attr("r", function(d) { return Math.sqrt(d.size) / 7 || 4.5; })
-      .attr("data-legend",function(d) { if (d.children) {return d.name}})
+      .attr("data-legend",function(d) { if (d.author === "Alex") {return d.name}})
+      // .attr("data-legend",function(d) { if (d.author === "Cici") {return d.name}})
+      // .attr("data-legend",function(d) { if (!d.children) {return d.name}})
+      // .attr("data-legend",function(d) {return d.name})
       .style("fill", color)
       .style("opacity", 0.9)
       .on("mouseover", function(d) {
@@ -557,12 +318,80 @@ function update() {
       .on("click", click)
       .call(force.drag);
 
-  var legend = svg.append("g")
+  node2.enter().append("circle")
+      // .attr("class", "node1")
+      // .attr("class", "node2")
+      .attr("class",function(d) { if (d.author==='Alex') {return "node1"} else if (d.author==='Cici') {return "node2"}})
+      .attr("data-legend",function(d) { if (d.author === "Cici") {return d.name}})
+      .style("fill", color)
+
+  var legend = svg.selectAll(".legend")
+    .data(node)
+    .enter()
+    .append("g")
     .attr("class","legend")
-    .attr("transform","translate(50,30)")
+    .attr("transform","translate(50,40)")
+    // .attr("transform", function(d,i) {
+    //   console.log(i, d)
+    //   xOff = (i % 2) * 50 + 50
+    //   yOff = Math.floor(i  / 2) * 10 + 40
+    //   return "translate(" + xOff + "," + yOff + ")" 
+    //   })
+    .attr("id", "survey1Legend")
     .style("font-size","12px")
     .style("font-family","Arial, Helvetica, sans-serif")
     .call(d3.legend)
+
+  var legend2 = svg2.selectAll(".legend")
+    .data(node2)
+    .enter()
+    .append("g")
+    .attr("class","legend")
+    .attr("transform","translate(180,40)")
+    .attr("z-index", 100)
+    .attr("id", "survey1Legend")
+    .style("font-size","12px")
+    .style("font-family","Arial, Helvetica, sans-serif")
+    .call(d3.legend)
+
+  var text = svg.append("text")
+    .attr("x", 40)
+    .attr("y", 20)
+    .attr("class", "legend")
+    .style("font-family","Arial, Helvetica, sans-serif")
+    .style("fill", "black")
+    .on("click", function(){
+      // Determine if current line is visible
+      var active   = surveyCircle.active ? false : true,
+      newOpacity = active ? 0 : 1;
+      // Hide or show the elements
+      // console.log(d3.selectAll(".node1"));
+      // d3.select("#survey1Legend").style("opacity", newOpacity);
+      // d3.select("#surveyLine").style("opacity", newOpacity);
+      d3.selectAll(".node1").style("opacity", newOpacity);
+      // Update whether or not the elements are active
+      surveyCircle.active = active;
+    })
+    .text("From Alex <3")
+
+  var text2 = svg.append("text")
+    .attr("x", 180)
+    .attr("y", 20)
+    .attr("class", "legend")
+    .style("font-family","Arial, Helvetica, sans-serif")
+    .style("fill", "black")
+    .on("click", function(){
+      // Determine if current line is visible
+      var active   = surveyCircle.active ? false : true,
+      newOpacity = active ? 0 : 1;
+      // Hide or show the elements
+      // d3.select("#surveyLegend").style("opacity", newOpacity);
+      // d3.select("#surveyLine").style("opacity", newOpacity);
+      d3.selectAll(".node2").style("opacity", newOpacity);
+      // Update whether or not the elements are active
+      surveyCircle.active = active;
+    })
+    .text("From Cici :P")
 }
 
 // Color leaf nodes orange, and packages white or blue.

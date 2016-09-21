@@ -17,6 +17,10 @@
     stroke-width: 1.2px;
   }
 
+  #legend {
+    z-index: 100;
+  }
+
   .legend rect {
     fill:white;
     stroke:#bcc4d2;
@@ -25,9 +29,14 @@
 
   </style>
   <body>
+    
+    <div id="tree"></div>
+    <div id="legend"></div>
     <script src="js/d3.min.js"></script>
+    <!-- <script src="js/d3plus.min.js"></script> -->
     <script src="js/d3.legend.js"></script>
     <!-- // <script src="http://d3js.org/d3.v3.min.js"></script> -->
     <script src="js/index.js"></script>
+
   </body>
 </html>
