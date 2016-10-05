@@ -19,13 +19,14 @@ var force = d3.layout.force()
     .size([width, height])
     .on("tick", tick);
 
+var svg2 = d3.select("#legend").append("svg")
+    .attr("transform","translate(0,0)")
+    .attr("width", 400)
+    .attr("height", 800);
+
 var svg = d3.select("#tree").append("svg")
     .attr("width", width)
     .attr("height", height);
-
-var svg2 = d3.select("#legend").append("svg")
-    .attr("width", 500)
-    .attr("height", 800);
 
 var link = svg.selectAll(".link"),
     node = svg.selectAll(".node"),
@@ -325,30 +326,29 @@ function update() {
       .attr("data-legend",function(d) { if (d.author === "Cici") {return d.name}})
       .style("fill", color)
 
+  var legend2 = svg2.selectAll(".legend")
+    .data(node2)
+    .enter()
+    .append("g")
+    .attr("class","legend")
+    .attr("transform","translate(150,20)")
+    .attr("id", "survey2Legend")
+    .style("font-size","12px")
+    .style("font-family","Arial, Helvetica, sans-serif")
+    .call(d3.legend)
+
   var legend = svg.selectAll(".legend")
     .data(node)
     .enter()
     .append("g")
     .attr("class","legend")
-    .attr("transform","translate(50,40)")
+    .attr("transform","translate(50,60)")
     // .attr("transform", function(d,i) {
     //   console.log(i, d)
     //   xOff = (i % 2) * 50 + 50
     //   yOff = Math.floor(i  / 2) * 10 + 40
     //   return "translate(" + xOff + "," + yOff + ")" 
     //   })
-    .attr("id", "survey1Legend")
-    .style("font-size","12px")
-    .style("font-family","Arial, Helvetica, sans-serif")
-    .call(d3.legend)
-
-  var legend2 = svg2.selectAll(".legend")
-    .data(node2)
-    .enter()
-    .append("g")
-    .attr("class","legend")
-    .attr("transform","translate(180,40)")
-    .attr("z-index", 100)
     .attr("id", "survey1Legend")
     .style("font-size","12px")
     .style("font-family","Arial, Helvetica, sans-serif")
@@ -361,6 +361,7 @@ function update() {
     .style("font-family","Arial, Helvetica, sans-serif")
     .style("fill", "black")
     .on("click", function(){
+      console.log("click on the alex");
       // Determine if current line is visible
       var active   = surveyCircle.active ? false : true,
       newOpacity = active ? 0 : 1;
@@ -381,6 +382,7 @@ function update() {
     .style("font-family","Arial, Helvetica, sans-serif")
     .style("fill", "black")
     .on("click", function(){
+      console.log("click on the cici");
       // Determine if current line is visible
       var active   = surveyCircle.active ? false : true,
       newOpacity = active ? 0 : 1;
